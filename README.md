@@ -17,23 +17,18 @@
 - 识别筹码结构、主力洗盘 / 出货倾向与阶段状态
 - 在结构成立前提下给出条件性目标价参考
 
-## 数据支持
+## 数据来源
 
-推荐优先安装并配置`mx-skills`，以便更方便地获取个股行情、财务、公告、研报等数据；必要时也可结合本地数据接口完成分析。
+推荐优先安装并配置`mx-skills`，以便更方便地获取个股行情、财务、公告、研报等数据；如没有配置，会回退其他开源数据源如`akshare`或`baoshare`；必要时也能结合本地数据接口完成分析。
 
-- `mx-skills`: [ai.eastmoney.com/mxClaw](https://ai.eastmoney.com/mxClaw)
-- 本Skill在输出中会明确标注数据来源（`mx-skills`/`akshare`/`baoshare`），并对缺失或不完整数据给出风险提示
-
-## 开源地址
-
-- GitHub: [byronwang2005/a-share-signal](https://github.com/byronwang2005/a-share-signal)
-- ClawHub: [clawhub.ai/byronwang2005/a-share-signal](https://clawhub.ai/byronwang2005/a-share-signal)（同步可能滞后）
+> [`mx-skills`官网](https://ai.eastmoney.com/mxClaw)
 
 ## 兼容性
 
 本Skill兼容主流Agent生态，包括但不限于：
 
 - OpenClaw
+ > ClawHub: [byronwang2005/a-share-signal](https://clawhub.ai/byronwang2005/a-share-signal)（同步可能滞后）
 - Claude Code
 - Codex
 - OpenCode
