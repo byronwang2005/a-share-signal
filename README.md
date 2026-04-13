@@ -19,7 +19,7 @@
 
 ## 数据来源
 
-默认只使用并主动匹配用户环境中的`mx-skills`，以便获取个股行情、财务、公告、研报等数据。未经用户明确同意，不回退到`akshare`、`baoshare`或其他非`mx-skills`数据源；如当前环境未配置相关`mx-skills`，会先继续查找已有封装或引导用户完成配置。
+默认优先使用并主动匹配用户环境中的新版 `mx-skills`，以便获取个股行情、财务、公告、研报等数据。路由上优先以 `mx-financial-assistant` 作为单票综合分析入口，再按需补 `mx-finance-data`、`mx-finance-search`、`mx-stocks-screener` 与 `mx-macro-data`。`akshare`、`baoshare` 仍保留为额外回退，但仅在用户明确同意后启用；如当前环境未配置相关 `mx-skills`，或缺少完成当前任务所需的全部 `mx-skills`，会先继续查找已有封装，并优先引导到 [ClawHub 自动更新页](https://clawhub.ai/u/financial-ai-analyst) 更新，失败后再提示去官网手动更新。
 
 > [`mx-skills`官网](https://ai.eastmoney.com/mxClaw)
 
