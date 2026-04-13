@@ -1,5 +1,7 @@
 # A股信号 `a-share-signal`
 
+[![ClawHub downloads](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fclawhub.ai%2Fapi%2Fv1%2Fskills%2Fa-share-signal&query=%24.skill.stats.downloads&label=ClawHub%20downloads&color=0A66C2)](https://clawhub.ai/byronwang2005/a-share-signal)
+
 `a-share-signal`是一个用于分析A股交易机会的Skill，聚焦结构化判断与可执行结论输出。本Skill中涉及的理论方法，来自一名作者线下认识的游资，其在妖股捕捉方面有极强的实战经验。
 
 > 相关内容仅用于研究交流与策略参考，不构成任何投资建议。
