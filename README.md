@@ -21,16 +21,15 @@
 
 ## 数据来源
 
-默认优先使用并主动匹配用户环境中的新版 `mx-skills`，以便获取个股行情、财务、公告、研报等数据。路由上优先以 `mx-financial-assistant` 作为单票综合分析入口，再按需补 `mx-finance-data`、`mx-finance-search`、`mx-stocks-screener` 与 `mx-macro-data`。所有 `mx-skills` 请求都要求严格串行执行，不论是不同 skills 之间的切换，还是对单个 skill 的多次补数，都必须等待上一请求完成后再继续，以降低限流、超时和口径漂移风险。`akshare`、`baoshare` 仍保留为额外回退，但仅在用户明确同意后启用；如当前环境未配置相关 `mx-skills`，或缺少完成当前任务所需的全部 `mx-skills`，会先继续查找已有封装，并优先引导到 [ClawHub 自动更新页](https://clawhub.ai/u/financial-ai-analyst) 更新，失败后再提示去官网手动更新。
+默认优先使用并主动匹配用户环境中的新版 `mx-skills`，以便获取个股行情、财务、公告、研报等数据。路由上优先以 `mx-financial-assistant` 作为单票综合分析入口，再按需补 `mx-finance-data`、`mx-finance-search`、`mx-stocks-screener` 与 `mx-macro-data`。所有 `mx-skills` 请求都要求严格串行执行，不论是不同 skills 之间的切换，还是对单个 skill 的多次补数，都必须等待上一请求完成后再继续，以降低限流、超时和口径漂移风险。`akshare`、`baoshare` 仍保留为额外回退，但仅在用户明确同意后启用；如当前环境未配置相关 `mx-skills`，或缺少完成当前任务所需的全部 `mx-skills`，会先继续查找已有封装，并优先到 [ClawHub](https://clawhub.ai/u/financial-ai-analyst) 更新，失败后再提示去官网手动更新。
 
-> [`mx-skills`官网](https://ai.eastmoney.com/mxClaw)
+> [mx-skills官网](https://ai.eastmoney.com/mxClaw)
 
 ## 兼容性
 
 本Skill兼容主流Agent生态，包括但不限于：
 
-- OpenClaw
- > ClawHub: [byronwang2005/a-share-signal](https://clawhub.ai/byronwang2005/a-share-signal)（同步可能滞后）
+- OpenClaw (ClawHub: [byronwang2005/a-share-signal](https://clawhub.ai/byronwang2005/a-share-signal)，同步可能滞后)
 - Claude Code
 - Codex
 - OpenCode
