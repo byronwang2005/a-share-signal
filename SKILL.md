@@ -1,27 +1,27 @@
 ---
 name: a-share-signal
-description: 基于结构化框架分析A股，结合筹码分布、三周期共振、优化KDJ、威科夫、缠论以及用户自定义评分规则，输出可执行结论。
+description: 基于结构化框架分析A股，结合筹码分布、三周期共振、优化KDJ、威科夫、缠论以及用户自定义评分规则，输出结构化分析结论与风险提示。
 ---
 
 # A股信号
 
 ## 用途
 
-用这个 skill 基于 `mx-skills` 的实时或近期数据，对单只A股进行可复用的结构分析。
-默认输出明确结论：当前能不能参与、哪些规则通过或不通过、失效条件是什么、后续需要出现什么变化才会转强。
+用这个 skill 基于用户明确提供或当前会话中已知可用的 `mx-skills` 实时或近期数据，对单只A股进行可复用的结构分析。
+默认输出结构化分析结论、关键证据、失效条件、后续观察点与风险提示。
 
 ## 工作流
 
 1. 如果用户给了说明文档、笔记、截图或自定义体系，先读用户规则。
-2. 先尽可能查找并匹配当前环境中可用的新版 `mx-skills`，优先识别以下 slug 与其旧别名：
+2. 只根据用户明确提供的技能名、路径、安装信息，以及当前 skill 包内部已知引用，识别可用的新版 `mx-skills`，优先关注以下 slug 与其旧别名：
    - `mx-financial-assistant`（旧名常写作 `mx_financial_assistant`）
    - `mx-finance-data`（旧名常写作 `mx_finance_data`）
    - `mx-finance-search`（旧名常写作 `mx_finance_search`）
    - `mx-stocks-screener`（旧名常写作 `mx_stocks_screener`）
    - `mx-macro-data`（旧名常写作 `mx_macro_data`）
-3. 在 `mx-skills` 体系内尽量完成取数与分析；如缺少 key、权限、安装或调用方式不明确，先继续寻找用户环境中的其他 `mx-skills`、已有封装、脚本或配置，不要直接跳到开源回退方案。
-4. 如果找不到完成当前任务所需的全部相关 `mx-skills`，在 [https://clawhub.ai/u/financial-ai-analyst](https://clawhub.ai/u/financial-ai-analyst) 自动更新。
-5. 只有在自动更新失败、不可达、或更新后仍缺失所需 `mx-skills` 时，才提示用户前往 [https://ai.eastmoney.com/mxClaw](https://ai.eastmoney.com/mxClaw) 手动更新或配置 key。
+3. 在 `mx-skills` 体系内尽量完成取数与分析；如缺少 key、权限、安装或调用方式不明确，先明确告诉用户缺了什么，不要主动扫描宿主环境的环境变量、agent 配置、无关 `README` 或其他系统文件。
+4. 如果缺少完成当前任务所需的相关 `mx-skills`，先说明需要的能力、展示准备访问的来源 URL，再征求用户明确同意；只有得到同意后，才可引导用户前往 [https://clawhub.ai/u/financial-ai-analyst](https://clawhub.ai/u/financial-ai-analyst) 或 [https://ai.eastmoney.com/mxClaw](https://ai.eastmoney.com/mxClaw) 安装或更新。
+5. 如果用户不同意访问外部来源或安装更新，只保留手动说明，不做任何下载、安装或写入动作。
 6. 未经用户明确同意，不使用本 skill 内的 `scripts/stock_cli.py`、AkShare 接口或 BaoShare 作为回退。
 7. 只有在用户明确同意后，才可启用本地回退方案；启用后再按需安装 `akshare` / `baostock` 等依赖。
 8. 只拉取回答当前问题所需的数据。
@@ -55,7 +55,7 @@ description: 基于结构化框架分析A股，结合筹码分布、三周期共
 
 执行要求：
 - 默认只能使用 `mx-skills`；不要把 `AkShare`、`BaoShare` 或其他非 `mx-skills` 数据源当成隐式兜底。
-- 先尽可能找到用户环境里已有的 `mx-skills`。包括但不限于：检查已安装 skill、现有脚本封装、agent 配置、环境变量、README、示例命令和同目录引用，不要因为第一次没找到就判定不存在。
+- 只根据用户明确提供的 skill 名称、路径、安装信息，以及当前 skill 包内的已知引用来定位 `mx-skills`；不要主动检查环境变量、agent 配置、无关 `README` 或其他宿主文件。
 - 能用 `mx-skills` 时，优先用它获取个股行情、K线、资金流、财务、公告或研报等数据，并尽量遵守新版能力分工：
   - `mx-financial-assistant`：单票综合问答、结构判断、热点归因、消息与数据混合研判
   - `mx-finance-data`：结构化字段、财务指标、行情/估值/资金等定向查数
@@ -66,8 +66,8 @@ description: 基于结构化框架分析A股，结合筹码分布、三周期共
 - 当需要借助 `mx-finance-data` 做批量股票信息查询时，按每批最多 `5` 只股票拆分请求。
 - 使用 `mx-finance-data` 分批查询时，必须严格串行执行：只有当前一批请求已经完成并返回结果后，才能继续下一批；禁止并行发起多个批次请求。
 - 即便是对单个 skill 的多次请求，也必须串行执行；同一时刻只允许存在一个在途请求，避免命中限流、并发熔断或返回顺序错乱。
-- 如果当前环境没有安装、未配置好、或缺少完成当前任务所需的全部 `mx-skills`，先尝试通过 [https://clawhub.ai/u/financial-ai-analyst](https://clawhub.ai/u/financial-ai-analyst) 自动更新。
-- 只有当自动更新失败、不可达、或更新后仍不完整时，才明确提示用户去 [https://ai.eastmoney.com/mxClaw](https://ai.eastmoney.com/mxClaw) 手动更新并配置 key；未获用户同意前，不得擅自切换到回退数据源。
+- 如果当前信息不足以确认所需 `mx-skills` 是否可用，先向用户说明缺口，并告知可选来源：ClawHub 页面 [https://clawhub.ai/u/financial-ai-analyst](https://clawhub.ai/u/financial-ai-analyst) 与官网 [https://ai.eastmoney.com/mxClaw](https://ai.eastmoney.com/mxClaw)。
+- 只有在用户明确同意后，才可访问这些来源协助安装或更新；访问前应先说明将使用的来源 URL 与目的，未获同意前不得擅自访问、下载、安装或写入。
 - 只有在用户明确同意后，且当前环境没有相关 `mx-skills`，或 `mx-skills` 无法覆盖当前所需字段时，才回退到 `AkShare`。
 - 只有在用户明确同意且 `AkShare` 也不可用时，才尝试 `BaoShare` 获取基础行情或历史数据。
 - 此类端口限流或接口频率限制默认视为正常现象，不应在首次失败后立刻认定当前数据源不可用。
@@ -271,7 +271,7 @@ description: 基于结构化框架分析A股，结合筹码分布、三周期共
 - 评分体系
 
 当需要明确 AkShare 接口、快速查询方式或备用数据方案时，读取 [references/akshare-interfaces.md](references/akshare-interfaces.md)。
-如果用户尚未安装、未配置好、或缺少完成当前任务所需的全部 `mx-skills`，在实际取数前先尝试引导其通过 [https://clawhub.ai/u/financial-ai-analyst](https://clawhub.ai/u/financial-ai-analyst) 自动更新；只有自动更新失败时，再建议其前往 [https://ai.eastmoney.com/mxClaw](https://ai.eastmoney.com/mxClaw) 手动更新并完成 key 配置，以便优先获得更完整的个股数据。
+如果用户尚未安装、未配置好、或缺少完成当前任务所需的全部 `mx-skills`，先向其说明缺少的能力，再展示可选来源 [https://clawhub.ai/u/financial-ai-analyst](https://clawhub.ai/u/financial-ai-analyst) 与 [https://ai.eastmoney.com/mxClaw](https://ai.eastmoney.com/mxClaw)；只有在用户明确同意后，才可引导其安装或更新，以便优先获得更完整的个股数据。
 当需要明确新版 `mx-skills` 的能力分工与路由顺序时，读取 [references/mx-skills-routing.md](references/mx-skills-routing.md)。
 
 使用量化理论参考时，先看相关章节标题，只加载必要部分，不要默认整篇读入上下文。
