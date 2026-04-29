@@ -1,8 +1,12 @@
-# A股信号 `a-share-signal`
+<div align="center">
+  <h1>a-share-signal</h1>
+  <p><b>A股信号</b></p>
+  <a href="https://clawhub.ai/byronwang2005/a-share-signal"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fclawhub.ai%2Fapi%2Fv1%2Fskills%2Fa-share-signal&query=%24.skill.stats.downloads&label=ClawHub%20downloads&color=0A66C2&style=flat-square" alt="ClawHub downloads"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT--0-blue.svg?style=flat-square" alt="License"></a>
+  <img src="https://img.shields.io/badge/Agent-Codex%20%7C%20Claude%20Code%20%7C%20OpenCode-111827?style=flat-square" alt="Agent compatibility">
+</div>
 
-[![ClawHub downloads](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fclawhub.ai%2Fapi%2Fv1%2Fskills%2Fa-share-signal&query=%24.skill.stats.downloads&label=ClawHub%20downloads&color=0A66C2)](https://clawhub.ai/byronwang2005/a-share-signal)
-
-`a-share-signal`是一个用于分析A股结构状态的 Skill，聚焦结构化分析结论、关键证据与风险提示。本 Skill 中涉及的理论方法，主要用于研究交流与技术框架复盘。
+`a-share-signal` 是一个用于分析 A 股结构状态的 Skill，聚焦结构化分析结论、关键证据与风险提示。本 Skill 中涉及的理论方法，主要用于研究交流与技术框架复盘。
 
 > 相关内容仅用于研究交流与策略参考，不构成任何投资建议。
 
